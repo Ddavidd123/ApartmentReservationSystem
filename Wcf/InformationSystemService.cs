@@ -1,22 +1,31 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ApartmentReservationSystem.Component1.Services;
+using ApartmentReservationSystem.Shared.Contracts;
+using ApartmentReservationSystem.Shared.Models;
+using CoreWCF;
 
-namespace Projekat.diagram
+namespace ApartmentReservationSystem.Component1.Wcf;
+
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+public class InformationSystemService : IInformationSystemService
 {
-	public class InformationSystemService : IInformationSystemService
-	{
-		private ApartmentService apartmentService;
-		private OccupancyRecordService occupancyRecordService;
+    private readonly ApartmentService _apartmentService;
+    private readonly OccupancyRecordService _occupancyRecordService;
 
-		public List<Apartment> GetApartments()
-		{
-			throw new NotImplementedException();
-		}
+    public InformationSystemService(
+        ApartmentService apartmentService,
+        OccupancyRecordService occupancyRecordService)
+    {
+        _apartmentService = apartmentService;
+        _occupancyRecordService = occupancyRecordService;
+    }
 
-		public List<ApartmentOccupancyRecord> GetRecordsByApartmentAndMonth(Guid apartmentId, int month)
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public List<Apartment> GetApartments()
+    {
+        return _apartmentService.GetAll().ToList();
+    }
+
+    public List<ApartmentOccupancyRecord> GetRecordsByApartmentAndMonth(Guid apartmentId, int month)
+    {
+        return _occupancyRecordService.GetByApartmentAndMonth(apartmentId, month).ToList();
+    }
 }

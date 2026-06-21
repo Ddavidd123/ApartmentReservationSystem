@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ApartmentReservationSystem.Shared.Enums;
+using ApartmentReservationSystem.Shared.Models;
 
-namespace Projekat.diagram
+namespace ApartmentReservationSystem.Component1.States;
+
+public class OutOfServiceState : IOccupancyState
 {
-	public class OutOfServiceState : IOccupancyState
-	{
-		public OccupancyState GetStateType()
-		{
-			throw new NotImplementedException();
-		}
+    public OccupancyState GetStateType() => OccupancyState.OutOfService;
 
-		public void MoveNext(ApartmentOccupancyRecord record)
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public void MoveNext(ApartmentOccupancyRecord record)
+    {
+        record.State = OccupancyState.Available;
+    }
 }

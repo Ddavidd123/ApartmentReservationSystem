@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+namespace ApartmentReservationSystem.Component1.Commands;
 
-namespace Projekat.diagram
+public interface IUndoableAction
 {
-	public interface IUndoableAction
-	{
-		void Execute();
-
-		void Unexecute();
-	}
+    void Execute();
+    void Unexecute();
 }

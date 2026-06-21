@@ -1,23 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ApartmentReservationSystem.Component1.Services;
+using ApartmentReservationSystem.Shared.Models;
 
-namespace Projekat.diagram
+namespace ApartmentReservationSystem.Component1.Commands;
+
+public class UpdateApartmentCommand : IUndoableAction
 {
-	public class UpdateApartmentCommand : IUndoableAction
-	{
-		private ApartmentService service;
-		private Apartment oldValue;
-		private Apartment newValue;
+    private readonly ApartmentService _service;
+    private readonly Apartment _oldValue;
+    private readonly Apartment _newValue;
 
-		public void Execute()
-		{
-			throw new NotImplementedException();
-		}
+    public UpdateApartmentCommand(ApartmentService service, Apartment oldValue, Apartment newValue)
+    {
+        _service = service;
+        _oldValue = oldValue.Clone();
+        _newValue = newValue.Clone();
+    }
 
-		public void Unexecute()
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public void Execute() => _service.Update(_newValue);
+
+    public void Unexecute() => _service.Update(_oldValue);
 }

@@ -1,27 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Windows.Input;
 
-namespace Projekat.diagram
+namespace ApartmentReservationSystem.Component1.Commands;
+
+public class RelayCommand : ICommand
 {
-	public class RelayCommand : ICommand
-	{
-		private Action execute;
-		private Func<bool> canExecute;
+    private readonly Action _execute;
+    private readonly Func<bool>? _canExecute;
 
-		public RelayCommand(Action execute, Func<bool> canExecute)
-		{
-			throw new NotImplementedException();
-		}
+    public RelayCommand(Action execute, Func<bool>? canExecute = null)
+    {
+        _execute = execute;
+        _canExecute = canExecute;
+    }
 
-		public void CanExecute()
-		{
-			throw new NotImplementedException();
-		}
+    public event EventHandler? CanExecuteChanged
+    {
+        add => CommandManager.RequerySuggested += value;
+        remove => CommandManager.RequerySuggested -= value;
+    }
 
-		public void Execute()
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public bool CanExecute(object? parameter) => _canExecute?.Invoke() ?? true;
+
+    public void Execute(object? parameter) => _execute();
+
+    public void RaiseCanExecuteChanged() => CommandManager.InvalidateRequerySuggested();
 }

@@ -1,27 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ApartmentReservationSystem.Component1.Commands;
 
-namespace Projekat.diagram
+namespace ApartmentReservationSystem.Component1.Services;
+
+public class UndoRedoService
 {
-	public class UndoRedoService
-	{
-		private Stack<IUndoableAction> undoStack;
-		private Stack<IUndoableAction> redoStack;
+    private readonly Stack<IUndoableAction> _undoStack = new();
+    private readonly Stack<IUndoableAction> _redoStack = new();
 
-		public void Execute(IUndoableAction action)
-		{
-			throw new NotImplementedException();
-		}
+    public bool CanUndo => _undoStack.Count > 0;
+    public bool CanRedo => _redoStack.Count > 0;
 
-		public void Undo()
-		{
-			throw new NotImplementedException();
-		}
+    public void Execute(IUndoableAction action)
+    {
+        action.Execute();
+        _undoStack.Push(action);
+        _redoStack.Clear();
+    }
 
-		public void Redo()
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public void Undo()
+    {
+        if (!CanUndo)
+        {
+            return;
+        }
+
+        var action = _undoStack.Pop();
+        action.Unexecute();
+        _redoStack.Push(action);
+    }
+
+    public void Redo()
+    {
+        if (!CanRedo)
+        {
+            return;
+        }
+
+        var action = _redoStack.Pop();
+        action.Execute();
+        _undoStack.Push(action);
+    }
 }

@@ -1,19 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ApartmentReservationSystem.Component1.Repositories;
+using ApartmentReservationSystem.Shared.Enums;
 
-namespace Projekat.diagram
+namespace ApartmentReservationSystem.Component1.Services;
+
+public class ChartService
 {
-	public class ChartService
-	{
-		public Dictionary<OccupancyState, int> GetRecordsCountByState()
-		{
-			throw new NotImplementedException();
-		}
+    private readonly OccupancyRecordRepository _recordRepository;
+    public event Action? ChartDataChanged;
 
-		public void RefreshChart()
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public ChartService(OccupancyRecordRepository recordRepository)
+    {
+        _recordRepository = recordRepository;
+        _recordRepository.GetAll().CollectionChanged += (_, _) => RefreshChart();
+    }
+
+    public Dictionary<OccupancyState, int> GetRecordsCountByState()
+    {
+        var counts = Enum.GetValues<OccupancyState>().ToDictionary(state => state, _ => 0);
+
+        foreach (var record in _recordRepository.GetAll())
+        {
+            counts[record.State]++;
+        }
+
+        return counts;
+    }
+
+    public void RefreshChart()
+    {
+        ChartDataChanged?.Invoke();
+    }
 }

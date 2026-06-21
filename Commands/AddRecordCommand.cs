@@ -1,22 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ApartmentReservationSystem.Component1.Services;
+using ApartmentReservationSystem.Shared.Models;
 
-namespace Projekat.diagram
+namespace ApartmentReservationSystem.Component1.Commands;
+
+public class AddRecordCommand : IUndoableAction
 {
-	public class AddRecordCommand : IUndoableAction
-	{
-		private OccupancyRecordService service;
-		private ApartmentOccupancyRecord record;
+    private readonly OccupancyRecordService _service;
+    private readonly ApartmentOccupancyRecord _record;
 
-		public void Execute()
-		{
-			throw new NotImplementedException();
-		}
+    public AddRecordCommand(OccupancyRecordService service, ApartmentOccupancyRecord record)
+    {
+        _service = service;
+        _record = record;
+    }
 
-		public void Unexecute()
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public void Execute() => _service.Add(_record);
+
+    public void Unexecute() => _service.Delete(_record.Id);
 }

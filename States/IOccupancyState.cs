@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ApartmentReservationSystem.Shared.Enums;
+using ApartmentReservationSystem.Shared.Models;
 
-namespace Projekat.diagram
+namespace ApartmentReservationSystem.Component1.States;
+
+public interface IOccupancyState
 {
-	public interface IOccupancyState
-	{
-		OccupancyState GetStateType();
-
-		void MoveNext(ApartmentOccupancyRecord record);
-	}
+    OccupancyState GetStateType();
+    void MoveNext(ApartmentOccupancyRecord record);
 }
