@@ -1,0 +1,851 @@
+<Project>
+  <Name>Projekat</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>diagram</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Enum">
+        <Name>ApartmentType</Name>
+        <Access>Public</Access>
+        <Location left="40" top="35" />
+        <Size width="190" height="150" />
+        <Collapsed>False</Collapsed>
+        <Value>SingleBed</Value>
+        <Value>DoubleBed</Value>
+        <Value>Studio</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>OccupancyState</Name>
+        <Access>Public</Access>
+        <Location left="330" top="40" />
+        <Size width="200" height="170" />
+        <Collapsed>False</Collapsed>
+        <Value>Available</Value>
+        <Value>Reserved</Value>
+        <Value>Occupied</Value>
+        <Value>OutOfService</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>Apartment</Name>
+        <Access>Public</Access>
+        <Location left="40" top="263" />
+        <Size width="270" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid Id</Member>
+        <Member type="Field">private string Address</Member>
+        <Member type="Field">private int Floor</Member>
+        <Member type="Field">private ApartmentType Type</Member>
+        <Member type="Field">private int Size</Member>
+        <Member type="Field">private int Capacity</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ApartmentOccupancyRecord</Name>
+        <Access>Public</Access>
+        <Location left="380" top="286" />
+        <Size width="265" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid Id</Member>
+        <Member type="Field">private Guid ApartmentId</Member>
+        <Member type="Field">private DateTime CheckInDate</Member>
+        <Member type="Field">private DateTime CheckoutDate</Member>
+        <Member type="Field">private double DailyRate</Member>
+        <Member type="Field">private double GuestRating</Member>
+        <Member type="Field">private OccupancyState State</Member>
+        <Member type="Field">private IOccupancyState currentState</Member>
+        <Member type="Method">public void SetState(IOccupancyState state)</Member>
+        <Member type="Method">public void MoveNextState()</Member>
+        <Member type="Method">public OccupancyState GetStateType()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IOccupancyState</Name>
+        <Access>Public</Access>
+        <Location left="760" top="40" />
+        <Size width="320" height="150" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">OccupancyState GetStateType()</Member>
+        <Member type="Method">void MoveNext(ApartmentOccupancyRecord record)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>AvailableState</Name>
+        <Access>Public</Access>
+        <Location left="722" top="355" />
+        <Size width="240" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public OccupancyState GetStateType()</Member>
+        <Member type="Method">public void MoveNext(ApartmentOccupancyRecord record)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ReservedState</Name>
+        <Access>Public</Access>
+        <Location left="1000" top="355" />
+        <Size width="240" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public OccupancyState GetStateType()</Member>
+        <Member type="Method">public void MoveNext(ApartmentOccupancyRecord record)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OccupiedState</Name>
+        <Access>Public</Access>
+        <Location left="700" top="553" />
+        <Size width="240" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public OccupancyState GetStateType()</Member>
+        <Member type="Method">public void MoveNext(ApartmentOccupancyRecord record)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OutOfServiceState</Name>
+        <Access>Public</Access>
+        <Location left="1000" top="553" />
+        <Size width="260" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public OccupancyState GetStateType()</Member>
+        <Member type="Method">public void MoveNext(ApartmentOccupancyRecord record)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IRepository&lt;T&gt;</Name>
+        <Access>Public</Access>
+        <Location left="40" top="660" />
+        <Size width="290" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">ObservableCollection&lt;T&gt; GetAll()</Member>
+        <Member type="Method">T GetById(Guid id)</Member>
+        <Member type="Method">void Add(T entity)</Member>
+        <Member type="Method">void Update(T entity)</Member>
+        <Member type="Method">void Delete(Guid id)</Member>
+        <Member type="Method">ObservableCollection&lt;T&gt; Search(Func&lt;T, bool&gt; predicate)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>ApartmentRepository</Name>
+        <Access>Public</Access>
+        <Location left="40" top="930" />
+        <Size width="300" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ObservableCollection&lt;Apartment&gt; items</Member>
+        <Member type="Method">public ObservableCollection&lt;Apartment&gt; GetAll()</Member>
+        <Member type="Method">public Apartment GetById(Guid id)</Member>
+        <Member type="Method">public void Add(Apartment entity)</Member>
+        <Member type="Method">public void Update(Apartment entity)</Member>
+        <Member type="Method">public void Delete(Guid id)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OccupancyRecordRepository</Name>
+        <Access>Public</Access>
+        <Location left="380" top="930" />
+        <Size width="360" height="190" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ObservableCollection&lt;ApartmentOccupancyRecord&gt; items</Member>
+        <Member type="Method">public ObservableCollection&lt;ApartmentOccupancyRecord&gt; GetAll()</Member>
+        <Member type="Method">public ApartmentOccupancyRecord GetById(Guid id)</Member>
+        <Member type="Method">public void Add(ApartmentOccupancyRecord entity)</Member>
+        <Member type="Method">public void Update(ApartmentOccupancyRecord entity)</Member>
+        <Member type="Method">public void Delete(Guid id)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>LoggingService</Name>
+        <Access>Public</Access>
+        <Location left="873" top="930" />
+        <Size width="220" height="120" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void Log(string message)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ApartmentService</Name>
+        <Access>Public</Access>
+        <Location left="40" top="1180" />
+        <Size width="320" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private IRepository&lt;Apartment&gt; repository</Member>
+        <Member type="Field">private LoggingService logger</Member>
+        <Member type="Method">public bool Validate(Apartment apartment)</Member>
+        <Member type="Method">public ObservableCollection&lt;Apartment&gt; GetAll()</Member>
+        <Member type="Method">public void Add(Apartment apartment)</Member>
+        <Member type="Method">public void Update(Apartment apartment)</Member>
+        <Member type="Method">public void Delete(Guid id)</Member>
+        <Member type="Method">public ObservableCollection&lt;Apartment&gt; Search(string criteria)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OccupancyRecordService</Name>
+        <Access>Public</Access>
+        <Location left="380" top="1180" />
+        <Size width="400" height="250" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private IRepository&lt;ApartmentOccupancyRecord&gt; repository</Member>
+        <Member type="Field">private LoggingService logger</Member>
+        <Member type="Method">public bool Validate(ApartmentOccupancyRecord record)</Member>
+        <Member type="Method">public ObservableCollection&lt;ApartmentOccupancyRecord&gt; GetAll()</Member>
+        <Member type="Method">public ObservableCollection&lt;ApartmentOccupancyRecord&gt; GetByApartmentAndMonth(Guid apartmentId, int month)</Member>
+        <Member type="Method">public void Add(ApartmentOccupancyRecord record)</Member>
+        <Member type="Method">public void Update(ApartmentOccupancyRecord record)</Member>
+        <Member type="Method">public void Delete(Guid id)</Member>
+        <Member type="Method">public ObservableCollection&lt;ApartmentOccupancyRecord&gt; Search(string criteria)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PersistenceService</Name>
+        <Access>Public</Access>
+        <Location left="843" top="1180" />
+        <Size width="300" height="170" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void SaveAsXml(string path)</Member>
+        <Member type="Method">public void LoadFromXml(string path)</Member>
+        <Member type="Method">public void SaveAsJson(string path)</Member>
+        <Member type="Method">public void LoadFromJson(string path)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>StateSimulationService</Name>
+        <Access>Public</Access>
+        <Location left="1178" top="1180" />
+        <Size width="340" height="170" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void Simulate(ApartmentOccupancyRecord record)</Member>
+        <Member type="Method">public void MoveNext(ApartmentOccupancyRecord record)</Member>
+        <Member type="Method">public OccupancyState GetCurrentState(ApartmentOccupancyRecord record)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ChartService</Name>
+        <Access>Public</Access>
+        <Location left="1590" top="1203" />
+        <Size width="320" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public Dictionary&lt;OccupancyState, int&gt; GetRecordsCountByState()</Member>
+        <Member type="Method">public void RefreshChart()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IUndoableAction</Name>
+        <Access>Public</Access>
+        <Location left="1540" top="40" />
+        <Size width="240" height="130" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void Execute()</Member>
+        <Member type="Method">void Unexecute()</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>AddApartmentCommand</Name>
+        <Access>Public</Access>
+        <Location left="1356" top="298" />
+        <Size width="280" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ApartmentService service</Member>
+        <Member type="Field">private Apartment apartment</Member>
+        <Member type="Method">public void Execute()</Member>
+        <Member type="Method">public void Unexecute()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UpdateApartmentCommand</Name>
+        <Access>Public</Access>
+        <Location left="1356" top="475" />
+        <Size width="280" height="165" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ApartmentService service</Member>
+        <Member type="Field">private Apartment oldValue</Member>
+        <Member type="Field">private Apartment newValue</Member>
+        <Member type="Method">public void Execute()</Member>
+        <Member type="Method">public void Unexecute()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DeleteApartmentCommand</Name>
+        <Access>Public</Access>
+        <Location left="1356" top="673" />
+        <Size width="280" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ApartmentService service</Member>
+        <Member type="Field">private Apartment apartment</Member>
+        <Member type="Method">public void Execute()</Member>
+        <Member type="Method">public void Unexecute()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AddRecordCommand</Name>
+        <Access>Public</Access>
+        <Location left="1833" top="158" />
+        <Size width="340" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private OccupancyRecordService service</Member>
+        <Member type="Field">private ApartmentOccupancyRecord record</Member>
+        <Member type="Method">public void Execute()</Member>
+        <Member type="Method">public void Unexecute()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UpdateRecordCommand</Name>
+        <Access>Public</Access>
+        <Location left="1833" top="325" />
+        <Size width="340" height="165" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private OccupancyRecordService service</Member>
+        <Member type="Field">private ApartmentOccupancyRecord oldValue</Member>
+        <Member type="Field">private ApartmentOccupancyRecord newValue</Member>
+        <Member type="Method">public void Execute()</Member>
+        <Member type="Method">public void Unexecute()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DeleteRecordCommand</Name>
+        <Access>Public</Access>
+        <Location left="1833" top="523" />
+        <Size width="340" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private OccupancyRecordService service</Member>
+        <Member type="Field">private ApartmentOccupancyRecord record</Member>
+        <Member type="Method">public void Execute()</Member>
+        <Member type="Method">public void Unexecute()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UndoRedoService</Name>
+        <Access>Public</Access>
+        <Location left="1869" top="985" />
+        <Size width="300" height="170" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Stack&lt;IUndoableAction&gt; undoStack</Member>
+        <Member type="Field">private Stack&lt;IUndoableAction&gt; redoStack</Member>
+        <Member type="Method">public void Execute(IUndoableAction action)</Member>
+        <Member type="Method">public void Undo()</Member>
+        <Member type="Method">public void Redo()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>MainViewModel</Name>
+        <Access>Public</Access>
+        <Location left="25" top="1520" />
+        <Size width="338" height="383" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public ObservableCollection&lt;Apartment&gt; Apartments</Member>
+        <Member type="Field">public ObservableCollection&lt;ApartmentOccupancyRecord&gt; Records</Member>
+        <Member type="Field">public Apartment SelectedApartment</Member>
+        <Member type="Field">public ApartmentOccupancyRecord SelectedRecord</Member>
+        <Member type="Field">private UndoRedoService undoRedoService</Member>
+        <Member type="Field">private ApartmentService apartmentService</Member>
+        <Member type="Field">private OccupancyRecordService recordService</Member>
+        <Member type="Method">public void AddApartment()</Member>
+        <Member type="Method">public void UpdateApartment()</Member>
+        <Member type="Method">public void DeleteApartment()</Member>
+        <Member type="Method">public void AddRecord()</Member>
+        <Member type="Method">public void UpdateRecord()</Member>
+        <Member type="Method">public void DeleteRecord()</Member>
+        <Member type="Method">public void Undo()</Member>
+        <Member type="Method">public void Redo()</Member>
+        <Member type="Method">public void Search()</Member>
+        <Member type="Method">public void Save()</Member>
+        <Member type="Method">public void Load()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IInformationSystemService</Name>
+        <Access>Public</Access>
+        <Location left="620" top="1520" />
+        <Size width="380" height="150" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List&lt;Apartment&gt; GetApartments()</Member>
+        <Member type="Method">List&lt;ApartmentOccupancyRecord&gt; GetRecordsByApartmentAndMonth(Guid apartmentId, int month)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>InformationSystemService</Name>
+        <Access>Public</Access>
+        <Location left="578" top="1769" />
+        <Size width="380" height="170" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ApartmentService apartmentService</Member>
+        <Member type="Field">private OccupancyRecordService occupancyRecordService</Member>
+        <Member type="Method">public List&lt;Apartment&gt; GetApartments()</Member>
+        <Member type="Method">public List&lt;ApartmentOccupancyRecord&gt; GetRecordsByApartmentAndMonth(Guid apartmentId, int month)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>InformationSystemClient</Name>
+        <Access>Public</Access>
+        <Location left="1040" top="1750" />
+        <Size width="340" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private IInformationSystemService service</Member>
+        <Member type="Method">public List&lt;ApartmentOccupancyRecord&gt; RequestRecords(Guid apartmentId, int month)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IRecordStorageAdapter</Name>
+        <Access>Public</Access>
+        <Location left="1450" top="1520" />
+        <Size width="350" height="120" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void Store(List&lt;ApartmentOccupancyRecord&gt; records, StatisticsDataStore dataStore)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>DictionaryRecordStorageAdapter</Name>
+        <Access>Public</Access>
+        <Location left="1450" top="1750" />
+        <Size width="400" height="150" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void Store(List&lt;ApartmentOccupancyRecord&gt; records, StatisticsDataStore dataStore)</Member>
+        <Member type="Method">private string BuildKey(ApartmentOccupancyRecord record)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>StatisticsDataStore</Name>
+        <Access>Public</Access>
+        <Location left="1924" top="1735" />
+        <Size width="380" height="165" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Dictionary&lt;string, List&lt;ApartmentOccupancyRecord&gt;&gt; RecordsByApartmentMonth</Member>
+        <Member type="Method">public void Add(string key, List&lt;ApartmentOccupancyRecord&gt; records)</Member>
+        <Member type="Method">public List&lt;ApartmentOccupancyRecord&gt; Get(string key)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IStatisticsMethod</Name>
+        <Access>Public</Access>
+        <Location left="1450" top="2010" />
+        <Size width="320" height="130" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">string GetName()</Member>
+        <Member type="Method">string Calculate(List&lt;ApartmentOccupancyRecord&gt; records)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>AverageDailyRateStrategy</Name>
+        <Access>Public</Access>
+        <Location left="1120" top="2230" />
+        <Size width="300" height="120" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public string Calculate(List&lt;ApartmentOccupancyRecord&gt; records)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>MaxRevenueStrategy</Name>
+        <Access>Public</Access>
+        <Location left="1462" top="2230" />
+        <Size width="300" height="120" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public string Calculate(List&lt;ApartmentOccupancyRecord&gt; records)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>LowRatingReservationsStrategy</Name>
+        <Access>Public</Access>
+        <Location left="1780" top="2230" />
+        <Size width="350" height="120" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public string Calculate(List&lt;ApartmentOccupancyRecord&gt; records)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CsvExportService</Name>
+        <Access>Public</Access>
+        <Location left="437" top="2482" />
+        <Size width="300" height="120" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void Export(string result, string path)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>StatisticsViewModel</Name>
+        <Access>Public</Access>
+        <Location left="590" top="2050" />
+        <Size width="450" height="270" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Guid SelectedApartmentId</Member>
+        <Member type="Field">private int SelectedMonth</Member>
+        <Member type="Field">private IStatisticsMethod SelectedMethod</Member>
+        <Member type="Field">private StatisticsDataStore dataStore</Member>
+        <Member type="Field">private IRecordStorageAdapter adapter</Member>
+        <Member type="Field">private InformationSystemClient client</Member>
+        <Member type="Method">public void LoadData()</Member>
+        <Member type="Method">public void Calculate()</Member>
+        <Member type="Method">public void ExportCsv()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>ICommand</Name>
+        <Access>Public</Access>
+        <Location left="95" top="2003" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool CanExecute()</Member>
+        <Member type="Method">void Execute()</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>RelayCommand</Name>
+        <Access>Public</Access>
+        <Location left="95" top="2300" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Action execute</Member>
+        <Member type="Field">private Func&lt;bool&gt; canExecute</Member>
+        <Member type="Constructor">public RelayCommand(Action execute, Func&lt;bool&gt; canExecute)</Member>
+        <Member type="Method">public void CanExecute()</Member>
+        <Member type="Method">public void Execute()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>MVVM - WPF interfejs je odvojen od poslovne logike. MainViewModel i StatisticsViewModel exposuju podatke i komande za View</Text>
+        <Location left="304" top="1940" />
+        <Size width="204" height="120" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>PROJEKTNI OBRASCI KOJI SMO KORISTILI
+1.IRepository skrivaju nacin cuvanja podataka. Servisi ne pristupaju direktno kolekcijama vec preko repo
+
+2. Command svaka CRUD akcija
+3. State - stanje zapisa zauzetosti
+4. Strategy - IStatisticsMethod i tri strategije omogucava biranje statisticke metode bez menjanje StatisticsViewModela
+5. Adapter
+6. Observer u MVVM - Obavestavaju View kada se podaci u viewModel-u promene</Text>
+        <Location left="863" top="2635" />
+        <Size width="311" height="267" />
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Dependency" first="2" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="3" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="2" second="3">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="3" second="4">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="5" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="6" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1010</X>
+          <Y>330</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="7" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>977</X>
+          <Y>588</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="8" second="4">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>975</X>
+          <Y>630</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="10" second="9">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>365</X>
+          <Y>911</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="11" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>467</X>
+          <Y>875</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>370</X>
+          <Y>832</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="13" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="14" second="11">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="13" second="12">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>355</X>
+          <Y>1155</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1018</X>
+          <Y>1142</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="14" second="12">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="16" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1208</X>
+          <Y>1155</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>561</X>
+          <Y>575</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="16" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="17" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>505</X>
+          <Y>630</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="19" second="18">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1605</X>
+          <Y>273</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="20" second="18">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1700</X>
+          <Y>522</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="21" second="18">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1701</X>
+          <Y>707</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="22" second="18">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1808</X>
+          <Y>266</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1765</X>
+          <Y>266</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="23" second="18">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1798</X>
+          <Y>392</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="24" second="18">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1785</X>
+          <Y>597</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="25" second="18">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1765</X>
+          <Y>1027</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="26" second="13">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="26" second="14">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>273</X>
+          <Y>1476</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>416</X>
+          <Y>1455</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="26" second="15">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>396</X>
+          <Y>1601</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>552</X>
+          <Y>1506</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="26" second="25">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="26" second="17">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1241</X>
+          <Y>1470</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1674</X>
+          <Y>1381</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="28" second="27">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="28" second="13">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>390</X>
+          <Y>1604</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>355</X>
+          <Y>1418</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="28" second="14">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="29" second="27">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1137</X>
+          <Y>1708</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="31" second="30">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="31" second="32">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="34" second="33">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="35" second="33">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="36" second="33">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="38" second="29">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="38" second="30">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1201</X>
+          <Y>2155</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1421</X>
+          <Y>1662</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="38" second="33">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="38" second="37">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="38" second="32">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1065</X>
+          <Y>2056</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1442</X>
+          <Y>1937</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="37" second="32">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1096</X>
+          <Y>2538</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2295</X>
+          <Y>1925</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="26" second="39">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="40" second="39">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="26" second="16">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>596</X>
+          <Y>1515</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1195</X>
+          <Y>1380</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

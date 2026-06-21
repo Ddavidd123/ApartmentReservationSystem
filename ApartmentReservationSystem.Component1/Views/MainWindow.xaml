@@ -1,0 +1,317 @@
+﻿<Window x:Class="ApartmentReservationSystem.Component1.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        xmlns:helpers="clr-namespace:ApartmentReservationSystem.Component1.Helpers"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        mc:Ignorable="d"
+        Title="Informacioni sistem - Rezervacije apartmana"
+        Height="920"
+        Width="1450"
+        MinHeight="760"
+        MinWidth="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        Background="Transparent">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      CornerRadius="0"
+                      GlassFrameThickness="0"
+                      ResizeBorderThickness="6"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <helpers:ApartmentIdToAddressConverter x:Key="ApartmentIdToAddressConverter"/>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource SurfaceBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="230"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header / title bar -->
+        <Border Grid.Row="0"
+                Background="{StaticResource PrimaryBrush}"
+                Padding="20,12,8,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                    <TextBlock Text="Informacioni sistem"
+                               FontSize="22"
+                               FontWeight="SemiBold"
+                               Foreground="White"/>
+                    <TextBlock Text="Upravljanje apartmanima i zapisima zauzetosti"
+                               FontSize="13"
+                               Foreground="#D6E8F7"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Top">
+                    <Button Content="&#xE921;"
+                            Style="{StaticResource WindowChromeButtonStyle}"
+                            shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                            ToolTip="Minimizuj"
+                            Click="MinimizeButton_Click"/>
+                    <Button x:Name="MaximizeButton"
+                            Content="&#xE922;"
+                            Style="{StaticResource WindowChromeButtonStyle}"
+                            shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                            ToolTip="Maximizuj"
+                            Click="MaximizeButton_Click"/>
+                    <Button Content="&#xE8BB;"
+                            Style="{StaticResource WindowCloseButtonStyle}"
+                            shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                            ToolTip="Zatvori"
+                            Click="CloseButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Toolbar -->
+        <Border Grid.Row="1"
+                Background="White"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,0,0,1"
+                Padding="16,12">
+            <WrapPanel VerticalAlignment="Center">
+                <TextBlock Text="Pretraga:" VerticalAlignment="Center" Margin="0,0,8,8"/>
+                <TextBox Width="240"
+                         Margin="0,0,8,8"
+                         Text="{Binding SearchCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="Pretrazi"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Margin="0,0,8,8"
+                        Command="{Binding SearchCommand}"/>
+                <Button Content="Resetuj"
+                        Margin="0,0,16,8"
+                        Command="{Binding ResetSearchCommand}"/>
+
+                <Border Width="1" Height="28" Background="{StaticResource BorderBrush}" Margin="0,0,16,8"/>
+                <Button Content="Undo" Margin="0,0,8,8" Command="{Binding UndoCommand}"/>
+                <Button Content="Redo" Margin="0,0,16,8" Command="{Binding RedoCommand}"/>
+
+                <Border Width="1" Height="28" Background="{StaticResource BorderBrush}" Margin="0,0,16,8"/>
+                <Button Content="Sacuvaj JSON" Margin="0,0,8,8" Command="{Binding SaveJsonCommand}"/>
+                <Button Content="Ucitaj JSON" Margin="0,0,8,8" Command="{Binding LoadJsonCommand}"/>
+                <Button Content="Sacuvaj XML" Margin="0,0,8,8" Command="{Binding SaveXmlCommand}"/>
+                <Button Content="Ucitaj XML" Margin="0,0,0,8" Command="{Binding LoadXmlCommand}"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- Main content -->
+        <Grid Grid.Row="2" Margin="16,12,16,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Apartmani">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Row="0"
+                              ItemsSource="{Binding Apartments}"
+                              SelectedItem="{Binding SelectedApartment}"
+                              CanUserAddRows="False"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Adresa" Binding="{Binding Address}" Width="*"/>
+                            <DataGridTextColumn Header="Sprat" Binding="{Binding Floor}" Width="60"/>
+                            <DataGridTextColumn Header="Tip" Binding="{Binding Type}" Width="100"/>
+                            <DataGridTextColumn Header="m2" Binding="{Binding Size}" Width="55"/>
+                            <DataGridTextColumn Header="Kapacitet" Binding="{Binding Capacity}" Width="75"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="1"
+                            Margin="0,12,0,0"
+                            Padding="12"
+                            Background="{StaticResource SurfaceBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="Adresa apartmana" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                            <TextBox Text="{Binding ApartmentAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                            <WrapPanel Margin="0,0,0,10">
+                                <StackPanel Margin="0,0,16,8">
+                                    <TextBlock Text="Sprat" Margin="0,0,0,4"/>
+                                    <TextBox Width="70" Text="{Binding ApartmentFloor}"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,16,8">
+                                    <TextBlock Text="Tip" Margin="0,0,0,4"/>
+                                    <ComboBox Width="130"
+                                              ItemsSource="{Binding ApartmentTypes}"
+                                              SelectedItem="{Binding ApartmentType}"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,16,8">
+                                    <TextBlock Text="Kvadratura (m2)" Margin="0,0,0,4"/>
+                                    <TextBox Width="80" Text="{Binding ApartmentSize}"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,8">
+                                    <TextBlock Text="Kapacitet" Margin="0,0,0,4"/>
+                                    <TextBox Width="80" Text="{Binding ApartmentCapacity}"/>
+                                </StackPanel>
+                            </WrapPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Dodaj"
+                                        Style="{StaticResource PrimaryButtonStyle}"
+                                        Command="{Binding AddApartmentCommand}"/>
+                                <Button Content="Izmeni" Command="{Binding UpdateApartmentCommand}"/>
+                                <Button Content="Obrisi" Command="{Binding DeleteApartmentCommand}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Column="2" Header="Zapisi zauzetosti">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Row="0"
+                              ItemsSource="{Binding Records}"
+                              SelectedItem="{Binding SelectedRecord}"
+                              CanUserAddRows="False"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Apartman" Width="*">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding Converter="{StaticResource ApartmentIdToAddressConverter}">
+                                        <Binding Path="ApartmentId"/>
+                                        <Binding Path="DataContext.Apartments" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Prijave" Binding="{Binding CheckInDate, StringFormat=dd.MM.yyyy}" Width="95"/>
+                            <DataGridTextColumn Header="Odjave" Binding="{Binding CheckoutDate, StringFormat=dd.MM.yyyy}" Width="95"/>
+                            <DataGridTextColumn Header="Cena (RSD)" Binding="{Binding DailyRate, StringFormat=N0}" Width="90"/>
+                            <DataGridTextColumn Header="Ocena" Binding="{Binding GuestRating}" Width="60"/>
+                            <DataGridTextColumn Header="Stanje" Binding="{Binding State}" Width="95"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="1"
+                            Margin="0,12,0,0"
+                            Padding="12"
+                            Background="{StaticResource SurfaceBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1">
+                        <StackPanel>
+                            <StackPanel Margin="0,0,0,10">
+                                <TextBlock Text="Apartman" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                <ComboBox ItemsSource="{Binding Apartments}"
+                                          DisplayMemberPath="Address"
+                                          SelectedValuePath="Id"
+                                          SelectedValue="{Binding RecordApartmentId}"/>
+                            </StackPanel>
+
+                            <WrapPanel Margin="0,0,0,10">
+                                <StackPanel Margin="0,0,16,8">
+                                    <TextBlock Text="Prijave" Margin="0,0,0,4"/>
+                                    <DatePicker SelectedDate="{Binding RecordCheckIn}" Width="130"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,16,8">
+                                    <TextBlock Text="Odjave" Margin="0,0,0,4"/>
+                                    <DatePicker SelectedDate="{Binding RecordCheckOut}" Width="130"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,16,8">
+                                    <TextBlock Text="Cena (RSD)" Margin="0,0,0,4"/>
+                                    <TextBox Width="90" Text="{Binding RecordDailyRate}"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,16,8">
+                                    <TextBlock Text="Ocena (1-5)" Margin="0,0,0,4"/>
+                                    <TextBox Width="70" Text="{Binding RecordGuestRating}"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,8">
+                                    <TextBlock Text="Stanje" Margin="0,0,0,4"/>
+                                    <ComboBox Width="130"
+                                              ItemsSource="{Binding OccupancyStates}"
+                                              SelectedItem="{Binding RecordState}"/>
+                                </StackPanel>
+                            </WrapPanel>
+
+                            <WrapPanel>
+                                <Button Content="Dodaj"
+                                        Style="{StaticResource PrimaryButtonStyle}"
+                                        Command="{Binding AddRecordCommand}"/>
+                                <Button Content="Izmeni" Command="{Binding UpdateRecordCommand}"/>
+                                <Button Content="Obrisi" Command="{Binding DeleteRecordCommand}"/>
+                                <Button Content="Simuliraj stanja" Command="{Binding SimulateStateCommand}"/>
+                                <Button Content="Sledece stanje" Command="{Binding MoveNextStateCommand}"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <!-- Status -->
+        <Border Grid.Row="3"
+                Margin="16,0,16,8"
+                Padding="12,10"
+                Background="{StaticResource PrimaryLightBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
+            <TextBlock Text="{Binding StatusMessage}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+        </Border>
+
+        <!-- Chart -->
+        <GroupBox Grid.Row="4"
+                  Margin="16,0,16,8"
+                  Header="Grafikon broja zapisa po stanjima (LiveCharts2)">
+            <lvc:PieChart Series="{Binding ChartSeries}"/>
+        </GroupBox>
+
+        <!-- Footer -->
+        <Border Grid.Row="5"
+                Background="White"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="16,10">
+            <StackPanel>
+                <TextBlock Foreground="Gray" TextWrapping="Wrap">
+                    <Run Text="WCF servis:" FontWeight="SemiBold"/>
+                    <Run Text="http://localhost:8733/InformationSystem/service"/>
+                </TextBlock>
+                <TextBlock Margin="0,4,0,0" Foreground="Gray" TextWrapping="Wrap">
+                    <Run Text="Folder podataka:" FontWeight="SemiBold"/>
+                    <Run Text="{Binding DataFolderPath, Mode=OneWay}"/>
+                </TextBlock>
+                <TextBlock Margin="0,2,0,0" Foreground="Gray" TextWrapping="Wrap">
+                    <Run Text="XML:" FontWeight="SemiBold"/>
+                    <Run Text="{Binding XmlFilePath, Mode=OneWay}"/>
+                    <Run Text="  |  JSON:" FontWeight="SemiBold"/>
+                    <Run Text="{Binding JsonFilePath, Mode=OneWay}"/>
+                </TextBlock>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
