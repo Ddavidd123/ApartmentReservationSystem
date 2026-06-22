@@ -5,7 +5,7 @@ namespace ApartmentReservationSystem.Component2.Strategies;
 
 public class MaxRevenueStrategy : IStatisticsMethod
 {
-    public string GetName() => "Maksimalni prihod od apartmana";
+    public string Name => "Maksimalni prihod od apartmana";
 
     public string Calculate(List<ApartmentOccupancyRecord> records)
     {

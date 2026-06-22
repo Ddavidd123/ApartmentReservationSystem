@@ -4,22 +4,33 @@ namespace ApartmentReservationSystem.Component2.Stores;
 
 public class StatisticsDataStore
 {
-    private readonly Dictionary<string, List<ApartmentOccupancyRecord>> _recordsByApartmentMonth = [];
+    private readonly Dictionary<string, List<ApartmentOccupancyRecord>> _recordsByKey = [];
 
-    public void Add(string key, List<ApartmentOccupancyRecord> records)
+    public void Clear()
     {
-        _recordsByApartmentMonth[key] = records;
+        _recordsByKey.Clear();
+    }
+
+    public void AddOrAppend(string key, ApartmentOccupancyRecord record)
+    {
+        if (!_recordsByKey.TryGetValue(key, out var records))
+        {
+            records = [];
+            _recordsByKey[key] = records;
+        }
+
+        records.Add(record);
     }
 
     public List<ApartmentOccupancyRecord> Get(string key)
     {
-        return _recordsByApartmentMonth.TryGetValue(key, out var records)
+        return _recordsByKey.TryGetValue(key, out var records)
             ? records
             : [];
     }
 
     public IReadOnlyDictionary<string, List<ApartmentOccupancyRecord>> GetAllEntries()
     {
-        return _recordsByApartmentMonth;
+        return _recordsByKey;
     }
 }

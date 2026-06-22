@@ -4,7 +4,7 @@ namespace ApartmentReservationSystem.Component2.Strategies;
 
 public class LowRatingReservationsStrategy : IStatisticsMethod
 {
-    public string GetName() => "Broj rezervacija sa ocenom ispod 3";
+    public string Name => "Broj rezervacija sa ocenom ispod 3";
 
     public string Calculate(List<ApartmentOccupancyRecord> records)
     {

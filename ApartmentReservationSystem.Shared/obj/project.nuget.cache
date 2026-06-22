@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "BsYZSPl0/WFil7X+4xsUqXPIFu03VGoWkxfd8gfiUXYQCI23zEbzbj9kj3RT4cITAQ6ondrUwjO2/hID5Dwt3g==",
+  "dgSpecHash": "ofTIH8hVd+I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\David\\Desktop\\RVA\\ProjekatRezervacije\\ApartmentReservationSystem.Shared\\ApartmentReservationSystem.Shared.csproj",
+  "projectFilePath": "C:\\Users\\arsen\\Source\\Repos\\ApartmentReservationSystem\\ApartmentReservationSystem.Shared\\ApartmentReservationSystem.Shared.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\David\\.nuget\\packages\\microsoft.extensions.objectpool\\8.0.10\\microsoft.extensions.objectpool.8.0.10.nupkg.sha512",
-    "C:\\Users\\David\\.nuget\\packages\\system.security.cryptography.pkcs\\8.0.1\\system.security.cryptography.pkcs.8.0.1.nupkg.sha512",
-    "C:\\Users\\David\\.nuget\\packages\\system.security.cryptography.xml\\8.0.2\\system.security.cryptography.xml.8.0.2.nupkg.sha512",
-    "C:\\Users\\David\\.nuget\\packages\\system.servicemodel.primitives\\8.1.2\\system.servicemodel.primitives.8.1.2.nupkg.sha512"
+    "C:\\Users\\arsen\\.nuget\\packages\\microsoft.extensions.objectpool\\8.0.10\\microsoft.extensions.objectpool.8.0.10.nupkg.sha512",
+    "C:\\Users\\arsen\\.nuget\\packages\\system.security.cryptography.pkcs\\8.0.1\\system.security.cryptography.pkcs.8.0.1.nupkg.sha512",
+    "C:\\Users\\arsen\\.nuget\\packages\\system.security.cryptography.xml\\8.0.2\\system.security.cryptography.xml.8.0.2.nupkg.sha512",
+    "C:\\Users\\arsen\\.nuget\\packages\\system.servicemodel.primitives\\8.1.2\\system.servicemodel.primitives.8.1.2.nupkg.sha512"
   ],
   "logs": []
 }

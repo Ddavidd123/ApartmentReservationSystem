@@ -4,6 +4,6 @@ namespace ApartmentReservationSystem.Component2.Strategies;
 
 public interface IStatisticsMethod
 {
-    string GetName();
+    string Name { get; }
     string Calculate(List<ApartmentOccupancyRecord> records);
 }

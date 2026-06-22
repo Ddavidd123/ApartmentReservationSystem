@@ -10,3 +10,16 @@ C:\Users\David\Desktop\RVA\ProjekatRezervacije\ApartmentReservationSystem.Shared
 C:\Users\David\Desktop\RVA\ProjekatRezervacije\ApartmentReservationSystem.Shared\obj\Debug\net8.0\refint\ApartmentReservationSystem.Shared.dll
 C:\Users\David\Desktop\RVA\ProjekatRezervacije\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.pdb
 C:\Users\David\Desktop\RVA\ProjekatRezervacije\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ref\ApartmentReservationSystem.Shared.dll
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\bin\Debug\net8.0\ApartmentReservationSystem.Shared.deps.json
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\bin\Debug\net8.0\ApartmentReservationSystem.Shared.dll
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\bin\Debug\net8.0\ApartmentReservationSystem.Shared.pdb
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.csproj.AssemblyReference.cache
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.AssemblyInfoInputs.cache
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.AssemblyInfo.cs
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.csproj.CoreCompileInputs.cache
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.sourcelink.json
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.dll
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\refint\ApartmentReservationSystem.Shared.dll
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ApartmentReservationSystem.Shared.pdb
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Shared\obj\Debug\net8.0\ref\ApartmentReservationSystem.Shared.dll

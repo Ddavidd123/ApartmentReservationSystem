@@ -7,14 +7,15 @@ public class DictionaryRecordStorageAdapter : IRecordStorageAdapter
 {
     public void Store(List<ApartmentOccupancyRecord> records, StatisticsDataStore dataStore)
     {
+        dataStore.Clear();
+
         foreach (var record in records)
         {
-            var key = BuildKey(record);
-            dataStore.Add(key, [record]);
+            dataStore.AddOrAppend(BuildKey(record), record);
         }
     }
 
-    private static string BuildKey(ApartmentOccupancyRecord record)
+    internal static string BuildKey(ApartmentOccupancyRecord record)
     {
         return $"{record.ApartmentId}-{record.CheckInDate:yyyy-MM-dd}";
     }

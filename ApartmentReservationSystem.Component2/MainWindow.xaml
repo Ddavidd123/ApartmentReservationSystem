@@ -3,10 +3,177 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ApartmentReservationSystem.Component2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Statisticka obrada podataka - Komponenta 2"
+        Height="720"
+        Width="980"
+        MinHeight="600"
+        MinWidth="820"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <Border Grid.Row="0"
+                Background="{StaticResource PrimaryBrush}"
+                CornerRadius="8"
+                Padding="16,14"
+                Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="Statisticka obrada podataka"
+                           FontSize="22"
+                           FontWeight="SemiBold"
+                           Foreground="White"/>
+                <TextBlock Text="Preuzimanje i analiza zapisa zauzetosti apartmana iz Komponente 1"
+                           FontSize="13"
+                           Foreground="#D6E8F7"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <GroupBox Grid.Row="1"
+                  Header="Preuzimanje podataka"
+                  Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Apartman:"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"
+                           FontWeight="SemiBold"/>
+
+                <ComboBox Grid.Column="1"
+                          ItemsSource="{Binding Apartments}"
+                          SelectedItem="{Binding SelectedApartment}"
+                          DisplayMemberPath="Address"
+                          Margin="0,0,16,0"/>
+
+                <TextBlock Grid.Column="2"
+                           Text="Mesec:"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"
+                           FontWeight="SemiBold"/>
+
+                <ComboBox Grid.Column="3"
+                          ItemsSource="{Binding Months}"
+                          SelectedItem="{Binding SelectedMonthOption}"
+                          DisplayMemberPath="Name"
+                          Margin="0,0,16,0"/>
+
+                <Button Grid.Column="4"
+                        Content="Ucitaj podatke"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding LoadDataCommand}"
+                        Margin="0"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2"
+                  Header="Preuzeti zapisi"
+                  Margin="0,0,0,16">
+            <ListBox ItemsSource="{Binding DisplayRecords}"
+                     FontFamily="Consolas"
+                     FontSize="12"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+                                   TextWrapping="Wrap"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <GroupBox Grid.Row="3"
+                  Header="Statisticka analiza"
+                  Margin="0,0,0,16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="Metoda:"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"
+                               FontWeight="SemiBold"/>
+
+                    <ComboBox Grid.Column="1"
+                              ItemsSource="{Binding AvailableMethods}"
+                              SelectedItem="{Binding SelectedMethod}"
+                              DisplayMemberPath="Name"
+                              Margin="0,0,16,0"/>
+
+                    <Button Grid.Column="2"
+                            Content="Izracunaj"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding CalculateCommand}"
+                            Margin="0"/>
+                </Grid>
+
+                <Border Grid.Row="1"
+                        Background="{StaticResource PrimaryLightBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="6"
+                        Padding="12,10"
+                        Margin="0,12,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Rezultat:"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,6"/>
+                        <TextBlock Text="{Binding Result}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource PrimaryBrush}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Background="White"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    Padding="12,8"
+                    VerticalAlignment="Center">
+                <TextBlock Text="{Binding StatusMessage}"
+                           Foreground="#57606A"/>
+            </Border>
+
+            <Button Grid.Column="1"
+                    Content="Izvezi u CSV"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Command="{Binding ExportCsvCommand}"
+                    Margin="12,0,0,0"/>
+        </Grid>
     </Grid>
 </Window>

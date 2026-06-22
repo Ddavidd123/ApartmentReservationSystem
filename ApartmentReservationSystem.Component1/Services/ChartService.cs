@@ -16,14 +16,9 @@ public class ChartService
 
     public Dictionary<OccupancyState, int> GetRecordsCountByState()
     {
-        var counts = Enum.GetValues<OccupancyState>().ToDictionary(state => state, _ => 0);
-
-        foreach (var record in _recordRepository.GetAll())
-        {
-            counts[record.State]++;
-        }
-
-        return counts;
+        return _recordRepository.GetAll()
+            .GroupBy(record => record.State)
+            .ToDictionary(group => group.Key, group => group.Count());
     }
 
     public void RefreshChart()

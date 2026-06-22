@@ -562,16 +562,45 @@ public class MainViewModel : ViewModelBase
     private void RefreshChart()
     {
         var counts = _chartService.GetRecordsCountByState();
+
         ChartSeries = counts
+            .OrderByDescending(pair => pair.Value)
             .Select(pair => new PieSeries<int>
             {
-                Name = pair.Key.ToString(),
+                Name = GetStateDisplayName(pair.Key),
                 Values = [pair.Value],
+                Fill = new SolidColorPaint(GetStateColor(pair.Key)),
                 DataLabelsPaint = new SolidColorPaint(SKColors.White),
-                DataLabelsSize = 14
+                DataLabelsSize = 14,
+                DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                DataLabelsFormatter = point => point.Coordinate.PrimaryValue.ToString()
             })
             .Cast<ISeries>()
             .ToArray();
+    }
+
+    private static string GetStateDisplayName(OccupancyState state)
+    {
+        return state switch
+        {
+            OccupancyState.Available => "Slobodan",
+            OccupancyState.Reserved => "Rezervisan",
+            OccupancyState.Occupied => "Zauzet",
+            OccupancyState.OutOfService => "Van funkcije",
+            _ => state.ToString()
+        };
+    }
+
+    private static SKColor GetStateColor(OccupancyState state)
+    {
+        return state switch
+        {
+            OccupancyState.Available => SKColor.Parse("#22C55E"),
+            OccupancyState.Reserved => SKColor.Parse("#F59E0B"),
+            OccupancyState.Occupied => SKColor.Parse("#2E75B6"),
+            OccupancyState.OutOfService => SKColor.Parse("#EF4444"),
+            _ => SKColors.Gray
+        };
     }
 
     private void RefreshCommandStates()

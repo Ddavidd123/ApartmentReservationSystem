@@ -5,7 +5,7 @@ namespace ApartmentReservationSystem.Component2.Strategies;
 
 public class AverageDailyRateStrategy : IStatisticsMethod
 {
-    public string GetName() => "Prosecna dnevna cena apartmana";
+    public string Name => "Prosecna dnevna cena apartmana";
 
     public string Calculate(List<ApartmentOccupancyRecord> records)
     {

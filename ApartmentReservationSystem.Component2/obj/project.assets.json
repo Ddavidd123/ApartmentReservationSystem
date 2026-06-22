@@ -56,6 +56,61 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "System.ServiceModel.Http/8.1.2": {
+        "type": "package",
+        "dependencies": {
+          "System.ServiceModel.Primitives": "8.1.2"
+        },
+        "compile": {
+          "ref/net8.0/System.ServiceModel.Http.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/System.ServiceModel.Http.dll": {
+            "related": ".pdb"
+          }
+        },
+        "resource": {
+          "lib/net8.0/cs/System.ServiceModel.Http.resources.dll": {
+            "locale": "cs"
+          },
+          "lib/net8.0/de/System.ServiceModel.Http.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net8.0/es/System.ServiceModel.Http.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net8.0/fr/System.ServiceModel.Http.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net8.0/it/System.ServiceModel.Http.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net8.0/ja/System.ServiceModel.Http.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net8.0/ko/System.ServiceModel.Http.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net8.0/pl/System.ServiceModel.Http.resources.dll": {
+            "locale": "pl"
+          },
+          "lib/net8.0/pt-BR/System.ServiceModel.Http.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net8.0/ru/System.ServiceModel.Http.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net8.0/tr/System.ServiceModel.Http.resources.dll": {
+            "locale": "tr"
+          },
+          "lib/net8.0/zh-Hans/System.ServiceModel.Http.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net8.0/zh-Hant/System.ServiceModel.Http.resources.dll": {
+            "locale": "zh-Hant"
+          }
+        }
+      },
       "System.ServiceModel.Primitives/8.1.2": {
         "type": "package",
         "dependencies": {
@@ -225,6 +280,50 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "System.ServiceModel.Http/8.1.2": {
+      "sha512": "2HoneRUCHB8kKQcuAladR16mIHuyi5f9DrrNnTjkaICv5X7YuwoI7GSrp9GTkRSxC4ddNcjMdwE01Rm0sPgoMw==",
+      "type": "package",
+      "path": "system.servicemodel.http/8.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "README.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net462/System.ServiceModel.Http.dll",
+        "lib/net462/System.ServiceModel.Http.pdb",
+        "lib/net8.0/System.ServiceModel.Http.dll",
+        "lib/net8.0/System.ServiceModel.Http.pdb",
+        "lib/net8.0/cs/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/de/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/es/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/fr/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/it/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/ja/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/ko/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/pl/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/pt-BR/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/ru/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/tr/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/zh-Hans/System.ServiceModel.Http.resources.dll",
+        "lib/net8.0/zh-Hant/System.ServiceModel.Http.resources.dll",
+        "lib/netstandard2.0/System.ServiceModel.Http.dll",
+        "lib/netstandard2.0/System.ServiceModel.Http.pdb",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/net462/System.ServiceModel.Http.dll",
+        "ref/net8.0/System.ServiceModel.Http.dll",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard2.0/System.ServiceModel.Http.dll",
+        "system.servicemodel.http.8.1.2.nupkg.sha512",
+        "system.servicemodel.http.nuspec"
+      ]
+    },
     "System.ServiceModel.Primitives/8.1.2": {
       "sha512": "xlJ07FAUSDjPL/GhvVY1/KVPWn2ce056X4nHPwqAa5rkNLiNN5rqh6VcgMUoF6J7ckwhkVJ1vVx/K/47nyyR9g==",
       "type": "package",
@@ -298,27 +397,29 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "ApartmentReservationSystem.Shared >= 1.0.0"
+      "ApartmentReservationSystem.Shared >= 1.0.0",
+      "System.ServiceModel.Http >= 8.1.2",
+      "System.ServiceModel.Primitives >= 8.1.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\David\\.nuget\\packages\\": {},
+    "C:\\Users\\arsen\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\David\\Desktop\\RVA\\ProjekatRezervacije\\ApartmentReservationSystem.Component2\\ApartmentReservationSystem.Component2.csproj",
+      "projectUniqueName": "C:\\Users\\arsen\\Source\\Repos\\ApartmentReservationSystem\\ApartmentReservationSystem.Component2\\ApartmentReservationSystem.Component2.csproj",
       "projectName": "ApartmentReservationSystem.Component2",
-      "projectPath": "C:\\Users\\David\\Desktop\\RVA\\ProjekatRezervacije\\ApartmentReservationSystem.Component2\\ApartmentReservationSystem.Component2.csproj",
-      "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\David\\Desktop\\RVA\\ProjekatRezervacije\\ApartmentReservationSystem.Component2\\obj\\",
+      "projectPath": "C:\\Users\\arsen\\Source\\Repos\\ApartmentReservationSystem\\ApartmentReservationSystem.Component2\\ApartmentReservationSystem.Component2.csproj",
+      "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\arsen\\Source\\Repos\\ApartmentReservationSystem\\ApartmentReservationSystem.Component2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -327,14 +428,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\David\\Desktop\\RVA\\ProjekatRezervacije\\ApartmentReservationSystem.Shared\\ApartmentReservationSystem.Shared.csproj": {
-              "projectPath": "C:\\Users\\David\\Desktop\\RVA\\ProjekatRezervacije\\ApartmentReservationSystem.Shared\\ApartmentReservationSystem.Shared.csproj"
+            "C:\\Users\\arsen\\Source\\Repos\\ApartmentReservationSystem\\ApartmentReservationSystem.Shared\\ApartmentReservationSystem.Shared.csproj": {
+              "projectPath": "C:\\Users\\arsen\\Source\\Repos\\ApartmentReservationSystem\\ApartmentReservationSystem.Shared\\ApartmentReservationSystem.Shared.csproj"
             }
           }
         }
@@ -348,11 +450,22 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
         "targetAlias": "net8.0-windows",
+        "dependencies": {
+          "System.ServiceModel.Http": {
+            "target": "Package",
+            "version": "[8.1.2, )"
+          },
+          "System.ServiceModel.Primitives": {
+            "target": "Package",
+            "version": "[8.1.2, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -372,7 +485,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

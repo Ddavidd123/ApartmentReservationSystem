@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\David\Desktop\RVA\ProjekatRezervacije\ApartmentReservationSystem.Component2\obj\Debug\net8.0-windows\
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Component2\obj\Debug\net8.0-windows\
 ApartmentReservationSystem.Component2
 none
 false
-TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\David\Desktop\RVA\ProjekatRezervacije\ApartmentReservationSystem.Component2\App.xaml
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+C:\Users\arsen\Source\Repos\ApartmentReservationSystem\ApartmentReservationSystem.Component2\App.xaml
 11407045341
 
-14331288512
-2041864122151
+20-597534451
+2051914094938
 MainWindow.xaml;
 
 False

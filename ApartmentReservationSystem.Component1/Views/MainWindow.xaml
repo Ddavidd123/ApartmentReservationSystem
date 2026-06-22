@@ -287,7 +287,9 @@
         <GroupBox Grid.Row="4"
                   Margin="16,0,16,8"
                   Header="Grafikon broja zapisa po stanjima (LiveCharts2)">
-            <lvc:PieChart Series="{Binding ChartSeries}"/>
+            <lvc:PieChart Series="{Binding ChartSeries}"
+                          LegendPosition="Right"
+                          TooltipPosition="Top"/>
         </GroupBox>
 
         <!-- Footer -->
