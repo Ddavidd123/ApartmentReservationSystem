@@ -58,6 +58,7 @@
                           ItemsSource="{Binding Apartments}"
                           SelectedItem="{Binding SelectedApartment}"
                           DisplayMemberPath="Address"
+                          DropDownOpened="ApartmentsComboBox_DropDownOpened"
                           Margin="0,0,16,0"/>
 
                 <TextBlock Grid.Column="2"

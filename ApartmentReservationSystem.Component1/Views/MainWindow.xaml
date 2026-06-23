@@ -122,10 +122,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="Apartmani">
-                <Grid>
+            <GroupBox Header="Apartmani" VerticalContentAlignment="Stretch">
+                <Grid VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" MinHeight="120"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
@@ -133,7 +133,9 @@
                               ItemsSource="{Binding Apartments}"
                               SelectedItem="{Binding SelectedApartment}"
                               CanUserAddRows="False"
-                              IsReadOnly="True">
+                              IsReadOnly="True"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Adresa" Binding="{Binding Address}" Width="*"/>
                             <DataGridTextColumn Header="Sprat" Binding="{Binding Floor}" Width="60"/>
@@ -187,10 +189,10 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox Grid.Column="2" Header="Zapisi zauzetosti">
-                <Grid>
+            <GroupBox Grid.Column="2" Header="Zapisi zauzetosti" VerticalContentAlignment="Stretch">
+                <Grid VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" MinHeight="120"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
@@ -198,7 +200,9 @@
                               ItemsSource="{Binding Records}"
                               SelectedItem="{Binding SelectedRecord}"
                               CanUserAddRows="False"
-                              IsReadOnly="True">
+                              IsReadOnly="True"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Apartman" Width="*">
                                 <DataGridTextColumn.Binding>

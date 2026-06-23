@@ -123,7 +123,12 @@
             <Setter Property="SelectionMode" Value="Single"/>
             <Setter Property="SelectionUnit" Value="FullRow"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="MinHeight" Value="220"/>
+            <Setter Property="MinHeight" Value="120"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="EnableRowVirtualization" Value="True"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         </Style>
 
         <Style TargetType="DataGridColumnHeader">

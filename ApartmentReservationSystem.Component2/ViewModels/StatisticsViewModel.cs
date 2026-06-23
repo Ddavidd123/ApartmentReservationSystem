@@ -44,7 +44,7 @@ public class StatisticsViewModel : ViewModelBase
         CalculateCommand = new RelayCommand(Calculate, () => SelectedMethod is not null);
         ExportCsvCommand = new RelayCommand(ExportCsv, () => _dataStore.GetAllEntries().Count > 0);
 
-        LoadApartments();
+        RefreshApartments();
     }
 
     public ObservableCollection<Apartment> Apartments { get; } = [];
@@ -113,13 +113,22 @@ public class StatisticsViewModel : ViewModelBase
 
     public StatisticsDataStore DataStore => _dataStore;
 
-    private void LoadApartments()
+    public void RefreshApartments(bool updateStatusMessage = true)
     {
+        var previouslySelectedId = SelectedApartment?.Id;
+        var previousCount = Apartments.Count;
+
         Apartments.Clear();
 
         if (!IsConnected)
         {
-            StatusMessage = "Nema konekcije sa Komponentom 1.";
+            if (updateStatusMessage)
+            {
+                StatusMessage = "Nema konekcije sa Komponentom 1.";
+            }
+
+            SelectedApartment = null;
+            LoadDataCommand.RaiseCanExecuteChanged();
             return;
         }
 
@@ -130,14 +139,30 @@ public class StatisticsViewModel : ViewModelBase
                 Apartments.Add(apartment);
             }
 
-            SelectedApartment = Apartments.FirstOrDefault();
-            StatusMessage = Apartments.Count == 0
-                ? "Komponenta 1 nema unetih apartmana."
-                : $"Ucitano {Apartments.Count} apartmana.";
+            SelectedApartment = previouslySelectedId is Guid id
+                ? Apartments.FirstOrDefault(apartment => apartment.Id == id)
+                : Apartments.FirstOrDefault();
+
+            if (SelectedApartment is null && Apartments.Count > 0)
+            {
+                SelectedApartment = Apartments[0];
+            }
+
+            if (updateStatusMessage || Apartments.Count != previousCount)
+            {
+                StatusMessage = Apartments.Count == 0
+                    ? "Komponenta 1 nema unetih apartmana."
+                    : $"Ucitano {Apartments.Count} apartmana.";
+            }
+
+            LoadDataCommand.RaiseCanExecuteChanged();
         }
         catch (Exception ex)
         {
-            StatusMessage = ex.Message;
+            if (updateStatusMessage)
+            {
+                StatusMessage = ex.Message;
+            }
         }
     }
 
@@ -158,6 +183,14 @@ public class StatisticsViewModel : ViewModelBase
 
         try
         {
+            RefreshApartments(updateStatusMessage: false);
+
+            if (SelectedApartment is null)
+            {
+                StatusMessage = "Nema dostupnih apartmana u Komponenti 1.";
+                return;
+            }
+
             var records = _client.RequestRecords(SelectedApartment.Id, SelectedMonthOption.Number);
             _adapter.Store(records, _dataStore);
             RefreshDisplayRecords();
@@ -209,6 +242,16 @@ public class StatisticsViewModel : ViewModelBase
 
     private void ExportCsv()
     {
+        var records = _dataStore.GetAllEntries()
+            .SelectMany(pair => pair.Value)
+            .ToList();
+
+        if (records.Count == 0)
+        {
+            StatusMessage = "Nema zapisa za izvoz u CSV.";
+            return;
+        }
+
         var dialog = new SaveFileDialog
         {
             Filter = "CSV fajl (*.csv)|*.csv",
@@ -222,7 +265,12 @@ public class StatisticsViewModel : ViewModelBase
 
         try
         {
-            _csvExportService.Export(Result, dialog.FileName);
+            _csvExportService.Export(
+                records,
+                SelectedMethod?.Name,
+                string.IsNullOrWhiteSpace(Result) ? null : Result,
+                dialog.FileName);
+
             StatusMessage = $"CSV sacuvan: {dialog.FileName}";
         }
         catch (Exception ex)
